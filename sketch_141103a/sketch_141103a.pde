@@ -1,5 +1,4 @@
-Boolean a = false;
-int nicol3 = 100;
+
 void setup(){
   size(800,800);
   
@@ -7,11 +6,22 @@ void setup(){
 
 
 void draw(){
-  //klm+nic0 > yMeng = true
   
-  background(255);
-  fill(random(255),150,0);
-  ellipse(width/2,height/2,nicol3,nicol3);
-  fill(random(255), random(255), random(255));
-  rect(mouseX, mouseY, 20, 20);
+  ////Call Level 1 
+  
+  ////Call Level 2
+  
+  ///Call Level 3
+  
+  ///Call Level 4 
+
+  
 }
+
+////Class for Level 1 
+
+////Class for Level 2 
+
+////Class for Level 3 
+
+////Class for Level 4 
