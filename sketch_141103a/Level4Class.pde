@@ -14,6 +14,7 @@ Player PlayerInstance4;
 float xpos4;
 float ypos4;
 
+
 class Level4Class {
 
   Level4Class(float xposTemp4, float yposTemp4) {
@@ -24,20 +25,47 @@ class Level4Class {
 
   void update() {
     PlayerInstance4.display();
+    meaning();
+    colorButton();
+    trueButton();
+    falseButton();
   }
-  
+
   void instructions() {
   }
 
   void trueButton() {
+    fill(190);
+    noStroke();
+    rectMode(CENTER);
+    rect(width/2 - 150, height/2 + 190, 150, 150);
+    fill(0);
+    textSize(50);
+    text("True", width/2 - 210, height/2 + 200);
   }
-  
+
   void falseButton() {
+    fill(190);
+    noStroke();
+    rectMode(CENTER);
+    rect(width/2 + 150, height/2 + 190, 150, 150);
+    fill(0);
+    textSize(50);
+    text("False", width/2 + 90, height/2 + 200);
   }
-  
+
+  void meaning() {
+    fill(190);
+    noStroke();
+    rectMode(CENTER);
+    rect(width/2, height/2 - 10, 300, 150);
+  }
+
   void colorButton() {
+    fill(190);
+    noStroke();
+    rectMode(CENTER);
+    rect(width/2, height/2 - 190, 300, 150);
   }
-  
-  
 }  
 
