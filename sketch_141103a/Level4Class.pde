@@ -17,6 +17,7 @@ float ypos4;
 
 class Level4Class {
 
+
   Level4Class(float xposTemp4, float yposTemp4) {
     xpos4 = xposTemp4;
     ypos4 = yposTemp4;
@@ -41,7 +42,7 @@ class Level4Class {
     rect(width/2 - 150, height/2 + 190, 150, 150);
     fill(0);
     textSize(50);
-    text("True", width/2 - 210, height/2 + 200);
+    text("True", width/2 - 150, height/2 + 190);
   }
 
   void falseButton() {
@@ -51,7 +52,7 @@ class Level4Class {
     rect(width/2 + 150, height/2 + 190, 150, 150);
     fill(0);
     textSize(50);
-    text("False", width/2 + 90, height/2 + 200);
+    text("False", width/2 + 150, height/2 + 190);
   }
 
   void meaning() {
@@ -59,13 +60,34 @@ class Level4Class {
     noStroke();
     rectMode(CENTER);
     rect(width/2, height/2 - 10, 300, 150);
-  }
 
-  void colorButton() {
-    fill(190);
-    noStroke();
-    rectMode(CENTER);
-    rect(width/2, height/2 - 190, 300, 150);
+
+    String x = "blue";
+    String y = "red";
+    String z = "yellow";
+
+    String [] s = {
+      x, y, z
+    };
+
+    int index = int(random(s.length)); 
+    fill(0);
+    textSize(60);
+    if (millis() < 15000) {
+      fill(190);
+      rect(width/2, height/2 - 10, 300, 150);
+      fill(0);
+      textAlign(CENTER);
+      text(s[index], 400, 400);
+      delay(500);
+    }
   }
-}  
+}
+
+void colorButton() {
+  fill(190);
+  noStroke();
+  rectMode(CENTER);
+  rect(width/2, height/2 - 190, 300, 150);
+}
 
