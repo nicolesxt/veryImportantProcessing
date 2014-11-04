@@ -73,7 +73,7 @@ class Level4Class {
     int index = int(random(s.length)); 
     fill(0);
     textSize(60);
-    if (millis() < 15000) {
+    if (millis() > 45000 && millis() < 60000) {
       fill(190);
       rect(width/2, height/2 - 10, 300, 150);
       fill(0);
