@@ -6,3 +6,5 @@
 ///for example, "if user defeats monster you get 25 points"
 ///Insert Ball for character, simple red 
 
+//Player PlayerInstance;
+//call the character
