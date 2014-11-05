@@ -62,9 +62,9 @@ class Level4Class {
     rect(width/2, height/2 - 10, 300, 150);
 
 
-    String x = "blue";
-    String y = "red";
-    String z = "yellow";
+    String x = "red";
+    String y = "green";
+    String z = "blue";
 
     String [] s = {
       x, y, z
@@ -73,23 +73,45 @@ class Level4Class {
     int index = int(random(s.length)); 
     fill(0);
     textSize(60);
-    if (millis() > 45000 && millis() < 60000) {
-      fill(190);
-      rect(width/2, height/2 - 10, 300, 150);
-      fill(0);
-      textAlign(CENTER);
-      text(s[index], 400, 400);
-      delay(500);
-    }
+    fill(190);
+    rect(width/2, height/2 - 10, 300, 150);
+    fill(0);
+    textAlign(CENTER);
+    text(s[index], 400, 400);
+    delay(500);
   }
 }
 
 void colorButton() {
+  String x = "red";
+  String y = "green";
+  String z = "blue";
+
+  int a = #ff0000;
+  int b = #00ff00;
+  int c = #0000ff;
+
+  String [] s = {
+    x, y, z
+  };
+
+  int [] t = {
+    a, b, c
+  };
+
+
+  int index = int(random(s.length)); 
+  int index2 = int(random(t.length)); 
+
+  textSize(60);
   fill(190);
-  noStroke();
-  rectMode(CENTER);
   rect(width/2, height/2 - 190, 300, 150);
+  fill(t[index2]);
+  delay(500);
+  text(s[index], width/2, height/2 - 170);
+  delay(500);
 }
+
 
 
 
@@ -109,3 +131,4 @@ class Player4 {
     ellipse(xpos, ypos, 25, 25);
   }
 }
+
