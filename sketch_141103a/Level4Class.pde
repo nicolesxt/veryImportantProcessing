@@ -9,7 +9,7 @@
 //Player PlayerInstance4;
 //call the character
 
-Player PlayerInstance4;
+Player4 PlayerInstance4;
 
 float xpos4;
 float ypos4;
@@ -21,7 +21,7 @@ class Level4Class {
   Level4Class(float xposTemp4, float yposTemp4) {
     xpos4 = xposTemp4;
     ypos4 = yposTemp4;
-    PlayerInstance4 = new Player (xposTemp4, yposTemp4);
+    PlayerInstance4 = new Player4 (xposTemp4, yposTemp4);
   }
 
   void update() {
@@ -91,3 +91,21 @@ void colorButton() {
   rect(width/2, height/2 - 190, 300, 150);
 }
 
+
+
+class Player4 {
+
+  float xpos;
+  float ypos;
+
+  Player4 (float xposTemp, float yposTemp) {
+    xpos = xposTemp;
+    ypos = yposTemp;
+  }
+
+  void display() {
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(xpos, ypos, 25, 25);
+  }
+}

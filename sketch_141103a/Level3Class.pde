@@ -8,3 +8,22 @@
 
 //Player PlayerInstance3;
 //call the character
+
+
+
+class Player3 {
+
+  float xpos;
+  float ypos;
+
+  Player3 (float xposTemp, float yposTemp) {
+    xpos = xposTemp;
+    ypos = yposTemp;
+  }
+
+  void display() {
+    noStroke();
+    fill(255, 0, 0);
+    ellipse(xpos, ypos, 25, 25);
+  }
+}
