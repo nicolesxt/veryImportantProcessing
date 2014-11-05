@@ -25,13 +25,7 @@ void setup() {
 void draw() {
   smooth();
   background(255);
-<<<<<<< Updated upstream
   
-=======
-
-
-
->>>>>>> Stashed changes
   if (millis() < 15000) {
     ////Call Level1Class
     Level1.update();
@@ -53,10 +47,8 @@ void draw() {
 
     Level4.update();
     Level4.meaning();
+    
   } else if (millis() > 60000) {
-    Level4.update();
-    Level4.meaning();
-    Level4.colorButton();
     //  EndLevel
   }
   
