@@ -1,147 +1,160 @@
-Player4 PlayerInstance4;
+//Player4 PlayerInstance4;
 
-float xpos4;
-float ypos4;
+//float xpos4;
+//float ypos4;
 
+//String displayString;
+//int displayColor; 
 
-int color1;
-int color2;
-int color3;
-
-
-////meaning button
-int meaning1; 
-int meaning2;
-int meaning3;
-
-String f = "red";
-String g = "green";
-String h = "blue";
-
+///BottomBar
 String [] s = {
-  f, g, h
+  "red", "green", "blue"
 };
 
-
-///colorbutton 
-String x = "red";
-String y = "green";
-String z = "blue";
-
-int a = #ff0000; //red
-int b = #00ff00; //green 
-int c = #0000ff; //blue
-
+///TopBar
 String [] t1 = {
-  x, y, z
+  "red", "green", "blue"
 };
 
 int [] t = {
-  a, b, c
+  #ff0000, #00ff00, #0000ff
 };
 
 
-class Level4Class {
+//MatchColor
+//String colorName = s[2];
+String displayString = s[2]; 
+int displayColor = t[2]; 
+//int colorDisplay = t[2];
 
-  Level4Class(float xposTemp4, float yposTemp4) {
-    xpos4 = xposTemp4;
-    ypos4 = yposTemp4;
-    PlayerInstance4 = new Player4 (xposTemp4, yposTemp4);
+ColorObject object;
+
+
+void setup() {
+  size(800, 800);
+
+  //object = new ColorObject (colorName, colorDisplay);
+  object = new ColorObject (displayString, displayColor);
+  //green = new ColorObject (s[1], t[1]);
+  //blue = new ColorObject (s[2], t[2]);
+
+  //PlayerInstance4 = new Player4 (xposTemp4, yposTemp4);
+}
+
+void draw() {
+  //PlayerInstance4.display();
+
+  object.update();
+  object.matchColor();
+  //green.update();
+  //blue.update();
+  trueButton();
+  falseButton();
+  mousePressed();
+}
+
+void instructions() {
+}
+
+void trueButton() {
+  fill(190);
+  noStroke();
+  rectMode(CENTER);
+  rect(width/2 - 150, height/2 + 190, 150, 150);
+  fill(0);
+  textSize(50);
+  text("True", width/2 - 150, height/2 + 190);
+}
+
+void falseButton() {
+  fill(190);
+  noStroke();
+  rectMode(CENTER);
+  rect(width/2 + 150, height/2 + 190, 150, 150);
+  fill(0);
+  textSize(50);
+  text("False", width/2 + 150, height/2 + 190);
+}
+
+void mousePressed() {
+
+  ///false button 
+  int false1 = width/2 + 150;
+  int false2 = height/2 + 190;
+  int false3 = 150;
+  int false4 = 150;
+
+  ///true button
+  int true1 = width/2 - 150;
+  int true2 = height/2 + 190;
+  int true3 = 150;
+  int true4 = 150;
+
+  ///locating where the true button is 
+  if (mouseOverTrue(false1, false2, false3, false4)) 
+  { 
+    fill(0, 255, 0);
+    ellipse(false1, false2, false3, false4);
+  } else if (mouseOverTrue(true1, true2, true3, true4)) 
+  {
+    fill(255, 0, 0);
+    ellipse(true1, true2, true3, true4);
   }
+} 
+
+///locating location of true button
+boolean mouseOverTrue(int x, int y, int z, float diameter) {
+  return (dist(mouseX, mouseY, x, y) < diameter*0.5);
+}
 
 
-  void update() {
-    meaning();
-    colorButton();
-    trueButton();
-    falseButton();
-    trueORfalse();
-  }
 
-  void instructions() {
-  }
 
-  void trueButton() {
-    fill(190);
-    noStroke();
-    rectMode(CENTER);
-    rect(width/2 - 150, height/2 + 190, 150, 150);
-    fill(0);
-    textSize(50);
-    text("True", width/2 - 150, height/2 + 190);
-  }
 
-  void falseButton() {
-    fill(190);
-    noStroke();
-    rectMode(CENTER);
-    rect(width/2 + 150, height/2 + 190, 150, 150);
-    fill(0);
-    textSize(50);
-    text("False", width/2 + 150, height/2 + 190);
-  }
+/*
 
-  void mousePressed() {
+ class Player4 {
+ 
+ float xpos;
+ float ypos;
+ 
+ Player4 (float xposTemp, float yposTemp) {
+ xpos = xposTemp;
+ ypos = yposTemp;
+ }
+ 
+ void display() {
+ noStroke();
+ fill(255, 0, 0);
+ ellipse(xpos, ypos, 25, 25);
+ }
+ }
+ */
+ 
+ class ColorObject {
 
-    ///false button 
-    int false1 = width/2 + 150;
-    int false2 = height/2 + 190;
-    int false3 = 150;
-    int false4 = 150;
-
-    ///true button
-    int true1 = width/2 - 150;
-    int true2 = height/2 + 190;
-    int true3 = 150;
-    int true4 = 150;
-
-    ///locating where the true button is 
-    if (mouseOverTrue(false1, false2, false3, false4)) 
-    { 
-      fill(0, 255, 0);
-      ellipse(false1, false2, false3, false4);
-    } else if (mouseOverTrue(true1, true2, true3, true4)) 
-    {
-      fill(255, 0, 0);
-      ellipse(true1, true2, true3, true4);
-    }
-  } 
-
-  ///locating location of true button
-  boolean mouseOverTrue(int x, int y, int z, float diameter) {
-    return (dist(mouseX, mouseY, x, y) < diameter*0.5);
-  }
-
-  /*
-///locating location of false button
-   boolean mouseOverFalse(int x1, int y1, int z1, float diameter1) {
-   return (dist(mouseX, mouseY, x1, y1) < diameter1*0.5);
+  /*ColorObject (String _colorName, int _colorDisplay) {
+   colorName = _colorName;
+   colorDisplay = _colorDisplay;
    }*/
 
-  void trueORfalse() {
 
-    //turning string into integer so I can compare string and integer 
-    //might not need this 
-    /* meaning1 = Integer.parseInt(x);
-     meaning2 = Integer.parseInt(y);
-     meaning3 = Integer.parseInt(z);
-     */
-    /* for (String
-     if (int[0] == trueRed) {
-     fill(0); 
-     ellipse(400, 400, 50, 50);
-     }*/
+  ColorObject (String _displayString, int _displayColor) {
+    displayString = _displayString;
+    displayColor = _displayColor;
+  }
 
-    /*if (meaning1 && color1 are active)
-     if (the true button is hit) {
-     ///give one point
-     } else if (the false button is hit) {
-     ///score stays the same 
-     }*/
-  } 
+  void update() {
+    bottomBar();
+    topBar();
+    //useRed();
+    //useGreen();
+    // useBlue ();
+  }
 
 
-  void meaning() {
+  void bottomBar() {
+
     fill(190); 
     noStroke(); 
     rectMode(CENTER); 
@@ -155,179 +168,55 @@ class Level4Class {
     fill(0); 
     textAlign(CENTER); 
     delay(500); 
+    displayString = s[index];
     text(s[index], 400, 400);
   }
 
 
-  void colorButton() {
+  void topBar() {
 
-    int index = int(random(t1.length)); 
     int index2 = int(random(t.length)); 
+    int index3 = int(random(t1.length)); 
 
     textSize(60); 
     fill(190); 
     rect(width/2, height/2 - 190, 300, 150); 
-    fill(t[index2]); 
-    delay(500); 
-    text(t1[index], width/2, height/2 - 170); 
     delay(500);
+    fill(t[index2]); 
+    displayColor = t[index3];
+    text(t1[index3], width/2, height/2 - 170);
   }
+
+  void matchColor() {
+    //if (colorName.equals(colorDisplay)) {
+    if (displayString.equals(displayColor)) {
+      //if ((colorName == ("red")) && (colorDisplay == (#ff0000))) {
+      fill(0);
+      ellipse(400, 400, 50, 50);
+    } else {
+      fill(255);
+      ellipse(400, 400, 50, 50);
+    }
+  }
+
+  /*void useGreen() {
+   if ((colorName == (s[1])) && (colorDisplay == (t[1]))) {
+   fill(0);
+   ellipse(400, 400, 50, 50);
+   } else {
+   fill(255);
+   ellipse(400, 400, 50, 50);
+   }
+   }
+   
+   void useBlue() {
+   if ((colorName == (s[2])) && (colorDisplay == (t[2]))) {
+   fill(0);
+   ellipse(400, 400, 50, 50);
+   } else {
+   fill(255);
+   ellipse(400, 400, 50, 50);
+   }
+   }*/
 }
 
-
-
- class Player4 {
- 
- float xpos;
- float ypos;
- 
- Player4 (float xposTemp, float yposTemp) {
- xpos = xposTemp;
- ypos = yposTemp;
- }
- 
- void display() {
- noStroke();
- fill(255, 0, 0);
- ellipse(xpos, ypos, 25, 25);
- }
- }
-
-
-
-
-////IGNORE THIS KEEPING IT IN CASE NEW CODE WONT WORK 
-/*///Class Stucture for Everyone to use 
- 
- ///Put instructions for how to play your game 
- ///for example put text "Yell to keep water off umbrella"
- ///Put score variable, use if statements within your code to change score variable 
- ///for example, "if user defeats monster you get 25 points"
- ///Insert Ball for character, simple red 
- 
- //Player PlayerInstance4;
- //call the character
- //
- 
- Player4 PlayerInstance4;
- 
- float xpos4;
- float ypos4;
- 
- 
- class Level4Class {
- 
- 
- Level4Class(float xposTemp4, float yposTemp4) {
- xpos4 = xposTemp4;
- ypos4 = yposTemp4;
- PlayerInstance4 = new Player4 (xposTemp4, yposTemp4);
- }
- 
- void update() {
- PlayerInstance4.display();
- meaning();
- colorButton();
- trueButton();
- falseButton();
- }
- 
- void instructions() {
- }
- 
- void trueButton() {
- fill(190);
- noStroke();
- rectMode(CENTER);
- rect(width/2 - 150, height/2 + 190, 150, 150);
- fill(0);
- textSize(50);
- text("True", width/2 - 150, height/2 + 190);
- }
- 
- void falseButton() {
- fill(190);
- noStroke();
- rectMode(CENTER);
- rect(width/2 + 150, height/2 + 190, 150, 150);
- fill(0);
- textSize(50);
- text("False", width/2 + 150, height/2 + 190);
- }
- 
- void meaning() {
- fill(190);
- noStroke();
- rectMode(CENTER);
- rect(width/2, height/2 - 10, 300, 150);
- 
- 
- String x = "red";
- String y = "green";
- String z = "blue";
- 
- String [] s = {
- x, y, z
- };
- 
- int index = int(random(s.length)); 
- fill(0);
- textSize(60);
- fill(190);
- rect(width/2, height/2 - 10, 300, 150);
- fill(0);
- textAlign(CENTER);
- text(s[index], 400, 400);
- delay(500);
- }
- }
- 
- void colorButton() {
- String x = "red";
- String y = "green";
- String z = "blue";
- 
- int a = #ff0000;
- int b = #00ff00;
- int c = #0000ff;
- 
- String [] s = {
- x, y, z
- };
- 
- int [] t = {
- a, b, c
- };
- 
- 
- int index = int(random(s.length)); 
- int index2 = int(random(t.length)); 
- 
- textSize(60);
- fill(190);
- rect(width/2, height/2 - 190, 300, 150);
- fill(t[index2]);
- delay(500);
- text(s[index], width/2, height/2 - 170);
- delay(500);
- }
- 
- 
- 
- 
- class Player4 {
- 
- float xpos;
- float ypos;
- 
- Player4 (float xposTemp, float yposTemp) {
- xpos = xposTemp;
- ypos = yposTemp;
- }
- 
- void display() {
- noStroke();
- fill(255, 0, 0);
- ellipse(xpos, ypos, 25, 25);
- }
- }*/
