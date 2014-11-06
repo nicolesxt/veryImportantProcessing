@@ -4,18 +4,19 @@
 
 Level1Class Level1;
 Level2Class Level2;
-//Level3Class Level3;
+Level3Class Level3;
 Level4Class Level4;
 
 void setup() {
   size(800, 800);
   Level1 = new Level1Class ();
   Level4 = new Level4Class (mouseX, mouseY);
+    Level3 = new Level3Class ();
   Level2 = new Level2Class ();
-  //  Level3 = new Level3Class (variableX, variableY);
-  
+
+
   //sound input
- minim = new Minim(this);
+  minim = new Minim(this);
   minim.debugOn();
   // use the getLineIn method of the Minim object to get an AudioInput
   in = minim.getLineIn();
@@ -25,7 +26,7 @@ void setup() {
 void draw() {
   smooth();
   background(255);
-  
+
   if (millis() < 15000) {
     ////Call Level1Class
     Level1.update();
@@ -33,23 +34,23 @@ void draw() {
   }
   //
   if (millis() >15000 && millis() < 30000) {
-      Level2.update();
-      Level2 = new Level2Class();
+    Level2.update();
+    Level2 = new Level2Class();
   }
   //
   if (millis() >30000 && millis() < 45000) {
-    //  Level3.update();
-    //  Level3 = new Level3Class(variableX, variableY);
+    Level3.update();
+    Level3 = new Level3Class();
   }
 
   if (millis() > 45000 && millis() < 60000) {
     Level4 = new Level4Class(mouseX, mouseY);
 
     Level4.update();
-    
   } else if (millis() > 60000) {
     //  EndLevel
   }
-  
+
   //println(millis());
 }
+
