@@ -3,7 +3,7 @@
 
 
 Level1Class Level1;
-//Level2Class Level2;
+Level2Class Level2;
 //Level3Class Level3;
 Level4Class Level4;
 
@@ -11,7 +11,7 @@ void setup() {
   size(800, 800);
   Level1 = new Level1Class ();
   Level4 = new Level4Class (mouseX, mouseY);
-  //  Level2 = new Level2Class (variableX, variableY);
+  Level2 = new Level2Class ();
   //  Level3 = new Level3Class (variableX, variableY);
   
   //sound input
@@ -33,8 +33,8 @@ void draw() {
   }
   //
   if (millis() >15000 && millis() < 30000) {
-    //  Level2.update();
-    //  Level2 = new Level2Class(variableX, variableY);
+      Level2.update();
+      Level2 = new Level2Class();
   }
   //
   if (millis() >30000 && millis() < 45000) {
