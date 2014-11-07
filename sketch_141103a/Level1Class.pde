@@ -1,14 +1,3 @@
-///Class Stucture for Everyone to use 
-
-///Put instructions for how to play your game 
-///for example put text "Yell to keep water off umbrella"
-///Put score variable, use if statements within your code to change score variable 
-///for example, "if user defeats monster you get 25 points"
-///Insert Ball for character, simple red 
-import ddf.minim.*;
-
-Minim minim;
-AudioInput in;
 
 Player1 PlayerInstance1;
 
@@ -17,55 +6,81 @@ Player1 PlayerInstance1;
       
 float xPos1 = 10.0;
 float yPos1 = 500.0;
-//float sum = 0.0;
+int xVel = 2;
+float modifier;
+float threshold;
+float rectY = 220.0;
+float accelY = 0.0;
+
+Boolean displaytext = false;
 
 class Level1Class{
   
     Level1Class(){
-//    float xPos1 = xPos1L1;
-//    float yPos1 = yPos1L1;
-//    float rectY;
-//    float sum = 0.0;
-//    rectY = height - sum;
-//    rectMode(CENTER);
-//    rect(width/2,0,700,rectY);
-      PlayerInstance1 = new Player1 ();
+    PlayerInstance1 = new Player1 ();
   }
+  
 void update(){
     background(#34465D);
-
-    float sum = 0.0;
-    for(int i = 0; i < in.bufferSize(); i++){
-       sum+=abs(in.left.get(i))*20;
-      }
-    println(sum);
-    
     PlayerInstance1.display();
-    
-    float rectY = height - sum + 27;
-    if (yPos1 < rectY && (xPos1>50 && xPos1<750)){
-      background(0);
-      print("something");
-      //GameState = false;
+    for(int a=0; a<50; a++){
+      for(int b=0; b<50; b++){
+        modifier = in.right.get((a*64+b)%1023)*64;
+        threshold = abs(modifier)*10;
+      }
     }
     
     fill(255);
-    rectMode(CENTER);
-    rect(width/2,100,700,rectY);
     rectMode(CORNER);
-    rect(0, yPos1+25/2, width, height-yPos1);
-    //display text
-    textSize(32);
-    fill(#3565A5);
-    rectMode(CENTER);
-    text("Yell to raise the wall!!! (*O*)", 100, 50);
+    rectY += accelY;
+    rect(50,rectY,700,300);
+    //println(threshold);
+    displayText();
+    
+    if(threshold>100){
+      accelY = -8;
+    }
+    else{
+      accelY = 4;
+      displayText();
+      if(rectY > 210){
+        accelY = 0;
+          if (rectY>190 && (xPos1>50 && xPos1<650)){
+            displaytext = true;
+          }
+       }
+    }
+    println (rectY);
+    fill(255);
+    rectMode(CORNER);
+    rect(0, yPos1+25/2, width, 5);
+    
+    
+    
+//    if ((threshold>100) && (xPos1>60 && xPos1<740)){
+//    background(0);
+//
+//    rectY += 5;
+//    xVel = 0;
+//    
+//    textSize(32);
+//    fill(#3565A5);
+//    
+//    rectMode(CENTER);
+//    text("You failed!!", 100, 50);
+//    
+//      //GameState = false;
+//    }else{
+//
+//
+//    }
 
     if (keyPressed == true){
         if (key == CODED){
            if (keyCode == LEFT){
-             xPos1 -= 20;
+             xPos1 -= xVel;
          } else if (keyCode == RIGHT){
-             xPos1 += 20;
+             xPos1 += xVel;
          }
        }
     }
@@ -73,10 +88,25 @@ void update(){
 }
 }
 
+void displayText(){
+  if (displaytext){
+    textSize(32);
+    fill(#3565A5);
+    rectMode(CENTER);
+    text("You just DIED, HAHAHAHA", 100, 50);
+  }
+  
+  if (!displaytext){
+    textSize(32);
+    fill(#3565A5);
+    rectMode(CENTER);
+    text("Yell to raise the wall!!! (*O*)", 100, 50);
+  }
+}
 
 class Player1 {
 
-  void display() {
+void display() {
     noStroke();
     fill(255, 0, 0);
     ellipse(xPos1, yPos1, 25, 25);

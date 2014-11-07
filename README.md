@@ -6,4 +6,4 @@ This file will revolutionize the way human being read and write code in Processi
 Prepared to be astonished and amazed!
 
 
-Dedicated by Kim and Nico
+Dedicated by Kim, Kate, Marco and Nico

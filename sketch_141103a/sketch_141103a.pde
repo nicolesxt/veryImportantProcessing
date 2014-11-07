@@ -1,3 +1,4 @@
+
 //You have to call player in your own LevelXClass
 //then call your LevelXClass in the main script
 
@@ -7,18 +8,19 @@ Level2Class Level2;
 Level3Class Level3;
 Level4Class Level4;
 
+import ddf.minim.*;
+Minim minim;
+AudioInput in;
+
 void setup() {
   size(800, 800);
   Level1 = new Level1Class ();
   Level4 = new Level4Class (mouseX, mouseY);
-    Level3 = new Level3Class ();
+  Level3 = new Level3Class ();
   Level2 = new Level2Class ();
-
-
-  //sound input
+  
   minim = new Minim(this);
-  minim.debugOn();
-  // use the getLineIn method of the Minim object to get an AudioInput
+  //minim.debugOn();
   in = minim.getLineIn();
 }
 
@@ -26,6 +28,9 @@ void setup() {
 void draw() {
   smooth();
   background(255);
+  
+  minim = new Minim(this);
+  in = minim.getLineIn();
 
   if (millis() < 15000) {
     ////Call Level1Class
