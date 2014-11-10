@@ -36,23 +36,17 @@ void draw() {
     ////Call Level1Class
     Level1.update();
     Level1 = new Level1Class();
-  }
-  //
-  if (millis() >15000 && millis() < 30000) {
+  }else if (millis() < 30000) {
     Level2.update();
     Level2 = new Level2Class();
-  }
-  //
-  if (millis() >30000 && millis() < 45000) {
+  }else if (millis() < 45000) {
     Level3.update();
     Level3 = new Level3Class();
-  }
-
-  if (millis() > 45000 && millis() < 60000) {
+  }else if (millis() < 60000) {
     Level4 = new Level4Class(mouseX, mouseY);
 
     Level4.update();
-  } else if (millis() > 60000) {
+  } else{
     //  EndLevel
   }
 
