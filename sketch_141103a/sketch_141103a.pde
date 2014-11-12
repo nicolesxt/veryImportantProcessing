@@ -5,7 +5,7 @@
 Level1Class Level1;
 //Level2Class Level2;
 Level3Class Level3;
-//Level4Class Level4;
+Level4Class Level4;
 //Level5Class EndLevel;
 
 import ddf.minim.*;
@@ -15,7 +15,7 @@ AudioInput in;
 void setup() {
   size(800, 800);
   Level1 = new Level1Class ();
-  //Level4 = new Level4Class (mouseX, mouseY);
+  Level4 = new Level4Class (mouseX, mouseY);
   Level3 = new Level3Class ();
   //Level2 = new Level2Class ();
   //EndLevel = new Level5Class();
