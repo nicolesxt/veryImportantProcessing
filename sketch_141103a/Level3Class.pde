@@ -10,7 +10,7 @@
 //call the character
 
 
-int ammo = 20;
+int ammo = 15;
 int score = 0;
 
 Ball target;
@@ -53,7 +53,7 @@ void playerScore () {
   textAlign(LEFT, CENTER);
   textSize(40);
   fill(255, 0, 0);
-  text("Hit " +score +"/10", 15, 780);
+  text("Hit " +score +"/5", 15, 780);
 }
 
 void playerAmmo () {
@@ -66,7 +66,7 @@ void playerAmmo () {
 
 void win () {
   
-  if (score >= 10) {
+  if (score >= 5) {
    println ("YOU WIN!");
        textAlign(CENTER, CENTER);
       textSize(100);
@@ -76,7 +76,7 @@ void win () {
 }
 
 void lose () {
-    if (ammo <= 0 && score <10) {
+    if (ammo <= 0 && score <5) {
     println ("YOU LOSE!");
     textAlign(CENTER, CENTER);
     textSize(100);
@@ -94,8 +94,8 @@ class Ball {
 
   Ball () { //classes need to always have a constructor
 
-    pos.x = random (width-20);
-    pos.y = random (height-20);
+    pos.x = random (width-21);
+    pos.y = random (height-21);
     vel.x = random (6, 8);
     vel.y = random (5, 6);
     rad = 40;
