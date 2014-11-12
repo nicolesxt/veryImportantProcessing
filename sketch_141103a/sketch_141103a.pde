@@ -33,12 +33,12 @@ void draw() {
   if (millis() < 15000) {
     ////Call Level1Class
     Level1.update();
-  }else if (millis()< 30000 || millis()>15000) {
+  }else if (millis()< 30000 && millis()>15000) {
     //Level2.update();
-  }else if (millis() < 45000 || millis()>30000) {
+  }else if (millis() < 45000 && millis() > 30000) {
     Level3.update();
-  }else if (millis() < 60000 || millis()>45000) {
-    //Level4.update();
+  }else if (millis() < 60000 && millis()>45000) {
+    Level4.update();
   } else{
     //EndLevel.update();
   }
