@@ -48,6 +48,7 @@ void draw() {
 
 
 void mousePressed() {
+  if (millis() < 45000 && millis() > 30000) {
   if (ammo > 0) {
     background (255);
     if (dist(mouseX, mouseY, target.pos.x, target.pos.y)<30) {
@@ -64,5 +65,5 @@ void mousePressed() {
   } else
     ammo =0;
 }
-
+}
 

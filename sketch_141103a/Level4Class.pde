@@ -1,11 +1,7 @@
 
-Player4 PlayerInstance4;
 
 float xpos4;
-float ypos4;
-
-//String displayString;
-//int displayColor; 
+float ypos4; 
 
 ///BottomBar
 String [] s = {
@@ -36,7 +32,6 @@ class Level4Class {
   Level4Class(float xposTemp4, float yposTemp4) {
     xpos4 = xposTemp4;
     ypos4 = yposTemp4;
-    PlayerInstance4 = new Player4 (xposTemp4, yposTemp4);
 
     //object = new ColorObject (colorName, colorDisplay);
     object = new ColorObject (displayString, displayColor);
@@ -47,13 +42,9 @@ class Level4Class {
 
 
   void update() {
-    //PlayerInstance4.display();
 
     cursor(HAND);
     object.update2();
-    object.matchColor();
-    //green.update();
-    //blue.update();
     trueButton();
     falseButton();
     mousePressed();
@@ -114,22 +105,6 @@ class Level4Class {
   }
 }
 
-class Player4 {
-
-  float xpos;
-  float ypos;
-
-  Player4 (float xposTemp, float yposTemp) {
-    xpos = xposTemp;
-    ypos = yposTemp;
-  }
-
-  void display() {
-    noStroke();
-    fill(255, 0, 0);
-    ellipse(xpos, ypos, 25, 25);
-  }
-}
 
 
 class ColorObject {
@@ -144,13 +119,10 @@ class ColorObject {
     displayString = _displayString;
     displayColor = _displayColor;
   }
-
+  
   void update2() {
     bottomBar();
     topBar();
-    //useRed();
-    //useGreen();
-    // useBlue ();
   }
 
 
@@ -187,39 +159,5 @@ class ColorObject {
     displayColor = t[index3];
     text(t1[index3], width/2, height/2 - 170);
   }
-
-  void matchColor() {
-    //if (colorName.equals(colorDisplay)) {
-    if (displayString.equals(displayColor)) {
-      //if ((colorName == ("red")) && (colorDisplay == (#ff0000))) {
-      fill(0);
-      ellipse(400, 400, 50, 50);
-    } else {
-      fill(255);
-      ellipse(400, 400, 50, 50);
-    }
-  }
-
-  /*void useGreen() {
-   if ((colorName == (s[1])) && (colorDisplay == (t[1]))) {
-   fill(0);
-   ellipse(400, 400, 50, 50);
-   } else {
-   fill(255);
-   ellipse(400, 400, 50, 50);
-   }
-   }
-   
-   void useBlue() {
-   if ((colorName == (s[2])) && (colorDisplay == (t[2]))) {
-   fill(0);
-   ellipse(400, 400, 50, 50);
-   } else {
-   fill(255);
-   ellipse(400, 400, 50, 50);
-   }
-   }*/
-   
 }
-//}
-//}
+
