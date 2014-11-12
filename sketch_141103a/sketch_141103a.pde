@@ -6,11 +6,13 @@ Level1Class Level1;
 //Level2Class Level2;
 Level3Class Level3;
 Level4Class Level4;
-//Level5Class EndLevel;
+EndLevel end;
 
 import ddf.minim.*;
 Minim minim;
 AudioInput in;
+
+int totalScore = 0;
 
 void setup() {
   size(800, 800);
@@ -18,7 +20,7 @@ void setup() {
   Level4 = new Level4Class (mouseX, mouseY);
   Level3 = new Level3Class ();
   //Level2 = new Level2Class ();
-  //EndLevel = new Level5Class();
+  end = new EndLevel();
   
   minim = new Minim(this);
   //minim.debugOn();
@@ -27,6 +29,7 @@ void setup() {
 
 
 void draw() {
+  println (totalScore);
   smooth();
   background(255);
 
@@ -39,8 +42,9 @@ void draw() {
     Level3.update();
   }else if (millis() < 60000 && millis()>45000) {
     Level4.update();
-  } else{
-    //EndLevel.update();
+  } else if (millis() > 60000){
+    end.update();
+    end.displayScore();
   }
 
   println(millis());

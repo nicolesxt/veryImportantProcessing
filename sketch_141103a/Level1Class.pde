@@ -67,7 +67,9 @@ void update(){
     
     
     if(xPos1 >= 775){
+      //you won
       a = c;
+      totalScore = 1;
     }
     
     println (rectY);
