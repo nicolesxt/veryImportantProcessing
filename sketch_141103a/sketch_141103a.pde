@@ -1,4 +1,3 @@
-
 //You have to call player in your own LevelXClass
 //then call your LevelXClass in the main script
 
@@ -7,6 +6,7 @@ Level1Class Level1;
 Level2Class Level2;
 Level3Class Level3;
 Level4Class Level4;
+Level5Class EndLevel;
 
 import ddf.minim.*;
 Minim minim;
@@ -18,6 +18,7 @@ void setup() {
   Level4 = new Level4Class (mouseX, mouseY);
   Level3 = new Level3Class ();
   Level2 = new Level2Class ();
+  EndLevel = new Level5Class();
   
   minim = new Minim(this);
   //minim.debugOn();
@@ -47,7 +48,8 @@ void draw() {
 
     Level4.update();
   } else{
-    //  EndLevel
+    EndLevel = new Level5Class();
+    EndLevel.update();
   }
 
   //println(millis());
