@@ -6,14 +6,17 @@ Player2 Player2Instance;
 int border=0;
 int timeSince;
 int score;
+int time;
+int _time;
 
 
 
 void setup() {
+  frameRate(90);
   size(800, 800);
   
   Player2Instance = new Player2();
-
+//time = seconds;
   for(int a=0; a < ballList.length; a++){
     
     ballList[a] = new enemyBall();
@@ -25,9 +28,7 @@ void setup() {
 
 
 void draw() {
-smooth();
-background(255);
-noFill();
+  noFill();
 beginShape();
 vertex(350, 350);
 vertex(400, 300);
@@ -38,8 +39,20 @@ beginShape();
 vertex(400, 300);
 vertex(400, 600);
 endShape();
+noStroke();
+  smooth();
+fill(255,255,255,20);
+rect(0,0,height,width);
+
+//background(255);
+
 
 Player2Instance.display();
+
+time ++;
+_time = time/90;
+
+text(_time, 10, 30);
 
 println(timeSince);
 for(int a=0; a < border; a++){
@@ -128,7 +141,7 @@ boolean right;
     
     noStroke();
     fill(255,0,0);
-    ellipse(xPos2, yPos2, rad2, rad2);
+    ellipse(xPos2, yPos2, rad2+random(-3,8), rad2+random(-3,8));
     
     movementLogic();
     collisionLogic();

@@ -13,9 +13,12 @@ Minim minim;
 AudioInput in;
 
 int totalScore = 0;
+int time;
+int _time;
 
 void setup() {
   size(800, 800);
+  //time = seconds;
   Level1 = new Level1Class ();
   Level4 = new Level4Class (mouseX, mouseY);
   Level3 = new Level3Class ();
@@ -29,6 +32,8 @@ void setup() {
 
 
 void draw() {
+
+  
   println (totalScore);
   smooth();
   background(255);
@@ -48,6 +53,11 @@ void draw() {
   }
 
   println(millis());
+  
+    time ++;
+_time = time/90;
+
+text(_time, 10, 30);
 }
 
 
