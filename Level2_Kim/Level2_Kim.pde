@@ -1,194 +1,209 @@
-//You have to call player in your own LevelXClass
-//then call your LevelXClass in the main script
+//Credit to "Chrisir" @ Processing Forum.
+// Credit to Antony Marefatk.
+
+enemyBall[] ballList = new enemyBall[100];
+Player2 Player2Instance;
+int border=0;
+int timeSince;
+int score;
 
 
-//Level1Class Level1;
-Level2Class Level2;
-//Level3Class Level3;
-//Level4Class Level4;
 
 void setup() {
   size(800, 800);
-  //Level1 = new Level1Class ();
-  //Level4 = new Level4Class (mouseX, mouseY);
-  Level2 = new Level2Class ();
-  //  Level3 = new Level3Class (variableX, variableY);
+  
+  Player2Instance = new Player2();
 
-  //sound input
-  minim = new Minim(this);
-  minim.debugOn();
-  // use the getLineIn method of the Minim object to get an AudioInput
-  in = minim.getLineIn();
+  for(int a=0; a < ballList.length; a++){
+    
+    ballList[a] = new enemyBall();
+    
+  }
+  
+  timeSince = millis();
 }
 
 
 void draw() {
-  smooth();
-  background(255);
+smooth();
+background(255);
+noFill();
+beginShape();
+vertex(350, 350);
+vertex(400, 300);
+vertex(450, 350);
+endShape();
+noFill();
+beginShape();
+vertex(400, 300);
+vertex(400, 600);
+endShape();
 
+Player2Instance.display();
 
-  Level2.update();
-  //Level2 = new Level2Class();
-}
-
-//println(millis());
-
-
-///Class Stucture for Everyone to use 
-
-///Put instructions for how to play your game 
-///for example put text "Yell to keep water off umbrella"
-///Put score variable, use if statements within your code to change score variable 
-///for example, "if user defeats monster you get 25 points"
-///Insert Ball for character, simple red 
-import ddf.minim.*;
-
-Minim minim;
-AudioInput in;
-
-
-
-int xPos;
-int yPos;
-boolean up2;
-boolean down2;
-boolean left2;
-boolean right2;
-int xSpeed = 3;
-int ySpeed = 3;
-int ballSize1 = 25;
-int score = 0;
-
-
-//main class
-class Level2Class {
-
-  Player2 PlayerInstance2;
-  enemyBallz enemyBallzInstance; 
-
-  Level2Class() {
-    PlayerInstance2 = new Player2();
-    enemyBallzInstance = new enemyBallz();
-    xPos = width/2;
-    yPos = height-15;
-    
-  }
-
-  void update() {
-    if (up2) yPos -= ySpeed;
-    if (down2) yPos += ySpeed;
-    if (left2) xPos -= xSpeed;
-    if (right2) xPos += xSpeed;
-    background(#34465D);
-    PlayerInstance2.display();
-    for(int i=0; i<100; i++){
-   enemyBallzInstance.rita();
-   
-       for(int j=i; j<100; j++)
-    {
-      if(i!=j)
-      {
-        float distance = dist(enemyBallz.xPos,enemyBallz.yPos,Player2.xPos,Player2.yPos);
-        if(distance<=(enemyBallz.ballSize2+Player2.ballSize1)/2+1)
+println(timeSince);
+for(int a=0; a < border; a++){
+  
+  ballList[a].update();
+  ballList[a].move(); 
+  //restarts position if collision
+  float distance = dist(ballList[a].xPos1,ballList[a].yPos1,Player2Instance.xPos2,Player2Instance.yPos2);
+        if(distance<=(ballList[a].rad1+Player2Instance.rad2)/2+1)
         {
-          
-            Player2.xPos = width/2;
-          Player2.yPos = height-15;
-          }
-
-    }
-    }
-    
-    
-}
-  
-  
-}
-  
-  void playerScore () {
-
-  textAlign(LEFT, CENTER);
-  textSize(40);
-  fill(255, 0, 0);
-  text("YOU MADE IT BRO " +score , 15, 780);
-
-class enemyBallz{
-  
-  PVector ballPos = new PVector(0,0);
-PVector ballVel = new PVector(0,3);
-float ballSize2 = random(25,45);
-
-  void inst() {
-  ballPos.x = random(0,800);
-  ballPos.y = 5;
-  
+Player2Instance.xPos2 = width/2;
+Player2Instance.yPos2 = height-15;
+        }
   }
   
-  void rita() {
-    movementLogic();
-    fill(random(20),random(20),random(20));
-    ellipse(ballPos.x, ballPos.y, ballSize2, ballSize2);
+  if (millis() - timeSince >=500){ //Spawn balls delay
+   timeSince = millis();
+  border++;
+ if (border>ballList.length)
+border=ballList.length; 
+    
   }
   
-  void movementLogic(){
+  /*if(Player2Instance.yPos2 <= 0){
+      //you won
+ millis() = 30000;
+      totalScore = 1;
+    }*/
+
+}
+
+
+class enemyBall{ // Attacking balls
+  float xPos1;
+  float yPos1;
+  float rad1;
+  float xVel1;
+  float yVel1;
   
-   ballPos.x += ballVel.x;
-   ballPos.y +=ballVel.y;
+  //Construction
+  enemyBall(){
+  xPos1= random(width); //Starting Point x
+  yPos1 = 1; // Starting Point y
+  xVel1= 0; //Direction
+  yVel1 = 1; // Direction
+  rad1 = random(50,100); //Size
+    
+  }
+  
+  void update(){
+  
+  stroke(0);
+  noFill(); //Color
+  ellipse(xPos1, yPos1, rad1, rad1);
+  stroke(255,0,0); 
+
+  }
+  
+  void move(){ //Movement
+    xPos1+=xVel1;
+    yPos1+=yVel1;
+    
+  }
 }
 
-}
-//the player class
-class Player2 {
-
-
-  void display() {
-
+class Player2{
+float xPos2;
+float yPos2;
+float rad2;
+float ySpeed;
+float xSpeed;
+boolean up;
+boolean down;
+boolean left;
+boolean right;
+  
+  
+ Player2(){ //Construction
+ xPos2 = width/2;
+ yPos2 = height-15;
+ rad2 = 25;
+ ySpeed = 1;
+ xSpeed = 1;
+ }
+      void display(){
+    
     noStroke();
-    fill(255, 0, 0);
-    ellipse(xPos, yPos, ballSize1, ballSize1);
-
+    fill(255,0,0);
+    ellipse(xPos2, yPos2, rad2, rad2);
+    
+    movementLogic();
+    collisionLogic();
+   }
+   
+   void movementLogic(){
+    if (up) yPos2 -= ySpeed;
+    if (down) yPos2 += ySpeed;
+    if (left) xPos2 -= xSpeed;
+    if (right) xPos2 += xSpeed;
+    
     if (keyPressed == true) {
       if (key == CODED) {
         if (keyCode == LEFT) {
-          left2 = true;
-          right2 = false;
+          left = true;
+          right = false;
         } 
         if (keyCode == RIGHT) {
-          left2 = false;
-          right2 = true;
+          left = false;
+          right = true;
         }
         if (keyCode == UP) {
-          down2 = false;
-          up2 = true;
+          down = false;
+          up = true;
         }
         if (keyCode == DOWN) {
-          down2 = true;
-          up2 = false;
+          down = true;
+          up = false;
         }
       }
     }
     if (keyPressed == false) {
       if (key == CODED) {
         if (keyCode == LEFT) {
-          left2 = false;
+          left = false;
           
         } 
         if (keyCode == RIGHT) {
 
-          right2 = false;
+          right = false;
           
         }
         if (keyCode == UP) {
 
-          up2 = false;
+          up = false;
       
         }
         if (keyCode == DOWN) {
-          down2 = false;
+          down = false;
           
         }
       }
     }
+     
+   }
+   
+   void collisionLogic() {
+  
+   // walls
+
+  if (xPos2 + rad2 >= width) {
+ xPos2 = width/2;
+ yPos2 = height-15;
   }
+ 
+  if (xPos2 - rad2 <= width-width) {
+ xPos2 = width/2;
+ yPos2 = height-15;
   }
+}
+  
+ } 
+  
+
+
+
+
 
