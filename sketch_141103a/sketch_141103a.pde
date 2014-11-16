@@ -3,7 +3,7 @@
 
 
 Level1Class Level1;
-//Level2Class Level2;
+Level2Class Level2;
 Level3Class Level3;
 Level4Class Level4;
 EndLevel end;
@@ -22,7 +22,7 @@ void setup() {
   Level1 = new Level1Class ();
   Level4 = new Level4Class (mouseX, mouseY);
   Level3 = new Level3Class ();
-  //Level2 = new Level2Class ();
+  Level2 = new Level2Class ();
   end = new EndLevel();
   
   minim = new Minim(this);
@@ -42,7 +42,7 @@ void draw() {
     ////Call Level1Class
     Level1.update();
   }else if (millis()< 30000 && millis()>15000) {
-    //Level2.update();
+    Level2.update();
   }else if (millis() < 45000 && millis() > 30000) {
     Level3.update();
   }else if (millis() < 60000 && millis()>45000) {
@@ -55,7 +55,7 @@ void draw() {
   println(millis());
   
     time ++;
-_time = time/90;
+_time = time/50;
 
 text(_time, 10, 30);
 }
