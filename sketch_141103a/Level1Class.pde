@@ -70,6 +70,7 @@ void update(){
       //you won
       a = c;
       totalScore = 1;
+      
     }
     
     println (rectY);

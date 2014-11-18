@@ -13,8 +13,8 @@ Minim minim;
 AudioInput in;
 
 int totalScore = 0;
-int time;
-int _time;
+//int time;
+//int _time;
 
 void setup() {
   size(800, 800);
@@ -36,13 +36,13 @@ void draw() {
   
   println (totalScore);
   smooth();
-  background(255);
+//  background(255);
 
   if (millis() < 15000) {
     ////Call Level1Class
     Level1.update();
   }else if (millis()< 30000 && millis()>15000) {
-    Level2.update();
+    Level2.display();
   }else if (millis() < 45000 && millis() > 30000) {
     Level3.update();
   }else if (millis() < 60000 && millis()>45000) {
@@ -54,10 +54,10 @@ void draw() {
 
   println(millis());
   
-    time ++;
-_time = time/50;
+ //   time ++;
+//_time = time/90;
 
-text(_time, 10, 30);
+//text(_time, 10, 30);
 }
 
 

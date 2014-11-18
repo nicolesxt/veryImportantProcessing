@@ -1,5 +1,5 @@
 //Credit to "Chrisir" @ Processing Forum.
-// Credit to Antony Marefatk.
+// Credit to Antony Marefat.
 class Level2Class{
 enemyBall[] ballList = new enemyBall[100];
 Player2 Player2Instance;
@@ -8,24 +8,16 @@ int timeSince;
 int score;
 Level2Class(){
 border=0;
-
-}
-
-
-
-void update() {
-  frameRate(90);
-  size(800, 800);
+frameRate(90);
+Player2Instance = new Player2();
+timeSince = millis();
   
-  Player2Instance = new Player2();
 
   for(int a=0; a < ballList.length; a++){
     
     ballList[a] = new enemyBall();
     
   }
-  
-  timeSince = millis();
 }
 
 
@@ -75,11 +67,19 @@ border=ballList.length;
     
   }
   
-  /*if(Player2Instance.yPos2 <= 0){
+  if(Player2Instance.yPos2 <= 5){
       //you won
- millis() = 30000;
-      totalScore = 1;
-    }*/
+
+      totalScore++;
+      
+      println (totalScore);
+      println ("WHOOP WHOOP");
+       textAlign(CENTER, CENTER);
+      textSize(100);
+      fill(0, 255, 0);
+      text("WHOOP WHOOP ", 400, 400);
+    
+    }
 
 }
 
@@ -96,7 +96,7 @@ class enemyBall{ // Attacking balls
   xPos1= random(width); //Starting Point x
   yPos1 = 1; // Starting Point y
   xVel1= 0; //Direction
-  yVel1 = 1; // Direction
+  yVel1 = 2; // Direction
   rad1 = random(50,100); //Size
     
   }
@@ -133,8 +133,8 @@ boolean right;
  xPos2 = width/2;
  yPos2 = height-15;
  rad2 = 25;
- ySpeed = 1;
- xSpeed = 1;
+ ySpeed = 3;
+ xSpeed = 3;
  }
       void display2(){
     
