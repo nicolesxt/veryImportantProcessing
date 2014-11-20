@@ -1,5 +1,3 @@
-
-
 float xpos4;
 float ypos4; 
 
@@ -24,9 +22,34 @@ String displayString = s[2];
 int displayColor = t[2]; 
 //int colorDisplay = t[2];
 
+
+int overallScore = 0;
+
+
 class Level4Class {
 
-  ColorObject object;
+
+  int trueBoxX = 250;
+  int trueBoxY = 590;
+  int trueBoxW = 150;
+  int trueBoxH = 150;
+
+  int falseBoxX = 550;
+  int falseBoxY = 590;
+  int falseBoxW = 150;
+  int falseBoxH = 150;
+
+  boolean trueState = false;
+  boolean falseState = false;
+
+  long lastTime = millis();
+
+  int index;
+  int index2;
+  int index3;
+
+  int gameState = 0;
+  //ColorObject object;
 
 
   Level4Class(float xposTemp4, float yposTemp4) {
@@ -34,7 +57,7 @@ class Level4Class {
     ypos4 = yposTemp4;
 
     //object = new ColorObject (colorName, colorDisplay);
-    object = new ColorObject (displayString, displayColor);
+    ///////object = new ColorObject (displayString, displayColor);
     //green = new ColorObject (s[1], t[1]);
     //blue = new ColorObject (s[2], t[2]);
   }
@@ -44,120 +67,137 @@ class Level4Class {
   void update() {
 
     cursor(HAND);
-    object.update2();
+    /////object.update2();
     trueButton();
     falseButton();
     mousePressed();
-  }
+    buttons();
+    score ();
 
-  void instructions() {
-  }
+    if (millis() - lastTime > 3000) {
+      println("3 second have PASSED");
+      lastTime = millis();
+    }
+  } 
+
 
   void trueButton() {
     fill(190);
     noStroke();
     rectMode(CENTER);
-    rect(width/2 - 150, height/2 + 190, 150, 150);
+    rect(trueBoxX, trueBoxY, trueBoxW, trueBoxH);
     fill(0);
     textSize(50);
-    text("True", width/2 - 150, height/2 + 190);
+    text("True", trueBoxX, trueBoxY);
   }
 
   void falseButton() {
     fill(190);
     noStroke();
     rectMode(CENTER);
-    rect(width/2 + 150, height/2 + 190, 150, 150);
+    rect(falseBoxX, falseBoxY, falseBoxW, falseBoxH);
     fill(0);
     textSize(50);
-    text("False", width/2 + 150, height/2 + 190);
+    text("False", falseBoxX, falseBoxY);
   }
 
   void mousePressed() {
 
-    ///false button 
-    int false1 = width/2 + 150;
-    int false2 = height/2 + 190;
-    int false3 = 150;
-    int false4 = 150;
-
-    ///true button
-    int true1 = width/2 - 150;
-    int true2 = height/2 + 190;
-    int true3 = 150;
-    int true4 = 150;
-
     ///locating where the true button is 
-    if (mouseOverTrue(false1, false2, false3, false4)) 
-    { 
+    if (mouseOverFalse(falseBoxX, falseBoxY, falseBoxW, falseBoxH)) { 
       fill(0, 255, 0);
-      ellipse(false1, false2, false3, false4);
-    } else if (mouseOverTrue(true1, true2, true3, true4)) 
-    {
+      ellipse(falseBoxX, falseBoxY, falseBoxW, falseBoxH);
+      falseState = true;
+      println("false sttate" + falseState);
+    } else if (mouseOverTrue(trueBoxX, trueBoxY, trueBoxW, trueBoxH)) {
       fill(255, 0, 0);
-      ellipse(true1, true2, true3, true4);
+      ellipse(trueBoxX, trueBoxY, trueBoxW, trueBoxH);
+      trueState = true;
+      println("true state" + trueState);
+    } else {
+      falseState = false;
+      trueState = false;
+      //println(falseState);
     }
-  } 
+  }
+
 
   ///locating location of true button
   boolean mouseOverTrue(int x, int y, int z, float diameter) {
     return (dist(mouseX, mouseY, x, y) < diameter*0.5);
   }
-}
 
 
-
-class ColorObject {
-
-  /*ColorObject (String _colorName, int _colorDisplay) {
-   colorName = _colorName;
-   colorDisplay = _colorDisplay;
-   }*/
-
-
-  ColorObject (String _displayString, int _displayColor) {
-    displayString = _displayString;
-    displayColor = _displayColor;
-  }
-  
-  void update2() {
-    bottomBar();
-    topBar();
+  boolean mouseOverFalse(int x, int y, int z, float diameter) {
+    return (dist(mouseX, mouseY, x, y) < diameter*0.5);
   }
 
 
-  void bottomBar() {
+
+  void buttons () {
+
+    textSize(60); 
+    fill(190); 
+    rect(width/2, height/2 - 190, 300, 150); 
+
+    fill(t[index2]); 
+    displayColor = t[index3];
+    text(t1[index3], width/2, height/2 - 170);
 
     fill(190); 
     noStroke(); 
     rectMode(CENTER); 
     rect(width/2, height/2 - 10, 300, 150); 
 
-    int index = int(random(s.length)); 
+
+
     fill(0); 
     textSize(60); 
     fill(190); 
     rect(width/2, height/2 - 10, 300, 150); 
     fill(0); 
     textAlign(CENTER); 
-    delay(500); 
+
     displayString = s[index];
     text(s[index], 400, 400);
+
+    if (gameState == 0) {
+
+      index2 = int(random(t.length)); 
+      index3 = int(random(t1.length));
+      index = int(random(s.length)); 
+
+
+
+
+      gameState++;
+    }
+
+
+
+    if (gameState == 1) {
+
+      if (mousePressed == true) {
+        if (s[index].equals(t1[index3]) == false && falseState == true) {
+          overallScore++;
+          gameState--;
+        } else if (s[index].equals(t1[index3]) == true && falseState == true) {
+          overallScore--;
+          gameState--;
+        } else if (s[index].equals(t1[index3]) == false && trueState == true) {
+          overallScore++;
+          gameState--;
+        } else if (s[index].equals(t1[index3]) == true && trueState == true) {
+          overallScore--;
+          gameState--;
+        }
+      }
+    }
   }
-
-
-  void topBar() {
-
-    int index2 = int(random(t.length)); 
-    int index3 = int(random(t1.length)); 
-
-    textSize(60); 
-    fill(190); 
-    rect(width/2, height/2 - 190, 300, 150); 
-    delay(500);
-    fill(t[index2]); 
-    displayColor = t[index3];
-    text(t1[index3], width/2, height/2 - 170);
+  void score () {
+    textSize(40);
+    fill(255, 0, 0);
+    text(overallScore, 15, 700);
   }
 }
 

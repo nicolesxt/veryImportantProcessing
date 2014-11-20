@@ -3,6 +3,8 @@ ColorObject displayString;
 ColorObject displayColor;
 
 
+
+
 void setup() {
   size(600, 600);
 
@@ -13,6 +15,7 @@ void setup() {
 
   int random1 = floor(random(0, 3));
   int random2 = floor(random(0, 3));
+
   displayString = colorList[random1];
   displayColor = colorList[random2];
 }
@@ -24,17 +27,19 @@ void draw() {
   //G -16711936
   //B - -16776961 
 
-  println(displayString.name + " VS " + displayColor.c);
-  if (displayColor == displayString) {
-    println("MATCHES");
-  } else println("DOESN'T MATCH");
-
   colorList[0].update();
   colorList[1].update();
   colorList[2].update();
-  colorList[0].mousePressed();
-  colorList[1].mousePressed();
-  colorList[2].mousePressed();
+  colorList[0].trueORfalse();
+  colorList[1].trueORfalse();
+  colorList[2].trueORfalse();
+
+  for (int i = 0; i < 10; i++) {
+    println(displayString.name + " VS " + displayColor.c);
+    if (displayString == displayColor) {
+      println("MATCHES");
+    } else println("DOESN'T MATCH");
+  }
 }
 
 class ColorObject {
@@ -70,6 +75,7 @@ class ColorObject {
     topBar();
     trueButton();
     falseButton();
+    trueORfalse();
   }
 
 
@@ -87,7 +93,6 @@ class ColorObject {
     rect(width/2, height/2 - 10, 300, 150); 
     fill(0); 
     textAlign(CENTER); 
-    delay(500); 
     displayString = s[index];
     text(s[index], width/2, height/2 - 10);
   }
@@ -100,7 +105,6 @@ class ColorObject {
     textSize(60); 
     fill(190); 
     rect(width/2, height/2 - 190, 300, 150); 
-    delay(500);
     fill(t[index2]); 
     displayColor = t[index3];
     text(t1[index3], width/2, height/2 - 170);
@@ -126,7 +130,7 @@ class ColorObject {
     text("False", width/2 + 150, height/2 + 190);
   }
 
-  void mousePressed () {
+  void trueORfalse () {
 
     ///false button 
     int false1 = width/2 + 150;
@@ -141,19 +145,19 @@ class ColorObject {
     int true4 = 150;
 
     ///locating where the true button is 
-    if (mouseOverTrue( true1, true2, true3, true4))
+    if (mousePressed && mouseOver( true1, true2, true3, true4))
     { 
-      fill(0, 255, 0);
-      ellipse(true1, true2, true3, true4); //
-    } else if (mouseOverTrue(false1, false2, false3, false4))  
+      fill(255);
+      rect(true1, true2, true3, true4); //
+    } else if (mousePressed && mouseOver(false1, false2, false3, false4))  
     {
-      fill(255, 0, 0);
-      ellipse(false1, false2, false3, false4);
+      fill(255);
+      rect(false1, false2, false3, false4);
     }
   }
 
   ///locating location of true button
-  boolean mouseOverTrue(int x, int y, int z, float diameter) {
+  boolean mouseOver(int x, int y, int z, float diameter) {
     return (dist(mouseX, mouseY, x, y) < diameter*0.5);
   }
 }
