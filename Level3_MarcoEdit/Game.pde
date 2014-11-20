@@ -2,7 +2,7 @@
 int ammo = 20;
 int score = 0;
 
-Ball target = new Ball ();
+Ball target;
 
 class Level3Class { 
   

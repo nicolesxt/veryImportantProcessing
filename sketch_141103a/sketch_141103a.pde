@@ -46,6 +46,7 @@ void draw() {
   }else if (millis() < 45000 && millis() > 30000) {
     Level3.update();
   }else if (millis() < 60000 && millis()>45000) {
+    background (0);
     Level4.update();
   } else if (millis() > 60000){
     end.update();
