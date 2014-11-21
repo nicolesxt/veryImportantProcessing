@@ -13,12 +13,14 @@ Minim minim;
 AudioInput in;
 
 int totalScore = 0;
-//int time;
-//int _time;
+int totalScore1;
+int totalScore2;
+int totalScore3;
+int totalScore4;
+
 
 void setup() {
   size(800, 800);
-  //time = seconds;
   Level1 = new Level1Class ();
   Level4 = new Level4Class (mouseX, mouseY);
   Level3 = new Level3Class ();
@@ -55,10 +57,9 @@ void draw() {
 
   println(millis());
   
- //   time ++;
-//_time = time/90;
-
-//text(_time, 10, 30);
+  //To display players total score at the end of the game
+  totalScore = totalScore1 + totalScore2 + totalScore3 + totalScore4;
+ 
 }
 
 

@@ -70,7 +70,7 @@ border=ballList.length;
   if(Player2Instance.yPos2 <= 5){
       //you won
 
-      totalScore++;
+      totalScore2 = 1;
       
       println (totalScore);
       println ("WHOOP WHOOP");

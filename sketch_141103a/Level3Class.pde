@@ -72,6 +72,8 @@ void win () {
       textSize(100);
       fill(0, 255, 0);
       text("YOU WIN!!!! ", 400, 400);
+      totalScore3 = 1;
+     
      
   }
 }

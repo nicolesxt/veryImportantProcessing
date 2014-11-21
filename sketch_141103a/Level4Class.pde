@@ -53,7 +53,7 @@ class Level4Class {
 
 
   Level4Class(float xposTemp4, float yposTemp4) {
-    
+
     xpos4 = xposTemp4;
     ypos4 = yposTemp4;
 
@@ -199,6 +199,12 @@ class Level4Class {
     textSize(40);
     fill(255, 0, 0);
     text(overallScore, 15, 700);
+
+    if (overallScore >= 10) {
+      totalScore4 = 1;
+    } else {
+      totalScore4 = 0;
+    }
   }
 }
 
